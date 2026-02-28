@@ -53,10 +53,10 @@ export default function Philosophy() {
                         className="lg:col-span-6 lg:pl-16 lg:border-l-2 lg:border-brand-text/20"
                     >
                         <p className="text-2xl md:text-3xl text-brand-muted font-body leading-relaxed font-medium">
-                            We <span className="text-brand-text font-bold">don't</span> do gimmicks.
+                            We <span className="text-brand-text font-bold">don&apos;t</span> do gimmicks.
                             We provide the atmosphere, equipment, and expertise required to
                             <span className="text-brand-accent italic font-black"> push your limits. </span>
-                            Hanuman GYM is more than a fitness center; it's a proving ground.
+                            Hanuman GYM is more than a fitness center; it&apos;s a proving ground.
                         </p>
                     </motion.div>
 
