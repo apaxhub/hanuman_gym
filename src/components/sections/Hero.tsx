@@ -1,106 +1,138 @@
-import Link from "next/link";
-import { heroContent, marqueeItems } from "@/data/siteData";
+"use client";
+
+import { useRef } from "react";
+import { siteData } from "@/data/siteData";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Hero() {
-  return (
-    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #1C1C18 1px, transparent 1px),
-            linear-gradient(to bottom, #1C1C18 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
+  const containerRef = useRef<HTMLElement>(null);
 
-      {/* Gradient blob */}
-      <div className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full opacity-[0.08]"
-        style={{ background: "radial-gradient(circle, #2563EB 0%, transparent 70%)" }}
-      />
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full opacity-[0.05]"
-        style={{ background: "radial-gradient(circle, #8C8B7E 0%, transparent 70%)" }}
-      />
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Parallax properties
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacityBg = useTransform(scrollYProgress, [0, 0.8], [0.4, 0]);
+
+  const yDumbbell = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const rotateDumbbell = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  const scaleDumbbell = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative h-[110svh] flex flex-col justify-center overflow-hidden bg-brand-text -mt-20"
+    >
+      {/* Background Image Parallax */}
+      <motion.div
+        className="absolute inset-0 z-0 origin-top"
+        style={{ y: yBg, opacity: opacityBg }}
+      >
+        <Image
+          src="/assets/hero/hero-gym.png"
+          alt="Gym Hero"
+          fill
+          className="object-cover object-top"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-text via-brand-text/80 to-transparent" />
+      </motion.div>
+
+      {/* 3D Floating Dumbbell Silhouette Overlay */}
+      <div className="absolute inset-0 z-0 flex items-center justify-end md:justify-center pointer-events-none overflow-hidden">
+        <motion.div
+          className="relative w-[800px] h-[800px] md:w-[1200px] md:h-[1200px] opacity-40 mix-blend-screen md:translate-x-1/4"
+          style={{
+            y: yDumbbell,
+            rotate: rotateDumbbell,
+            scale: scaleDumbbell
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.15, scale: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+        >
+          <Image
+            src="/assets/hero/floating_dumbbell.png"
+            alt="Floating Dumbbell 3D"
+            fill
+            className="object-contain"
+            priority
+          />
+        </motion.div>
+      </div>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-20 pt-32">
-        {/* Eyebrow */}
-        <p
-          className="text-xs font-mono uppercase tracking-[0.25em] text-brand-muted mb-8 animate-fade-in"
-          style={{ animationDelay: "0.1s" }}
-        >
-          <span className="inline-block w-4 h-px bg-brand-accent mr-3 align-middle" />
-          {heroContent.eyebrow}
-        </p>
+      <motion.div
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full mt-20"
+        style={{ y: yText, opacity: opacityText }}
+      >
+        <div className="max-w-3xl">
+          <motion.p
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-brand-accent font-mono tracking-widest uppercase mb-6 flex items-center gap-3"
+          >
+            <span className="w-8 h-[2px] bg-brand-accent shadow-[0_0_10px_rgba(225,6,0,0.8)]"></span>
+            Welcome to {siteData.global.gymName}
+          </motion.p>
 
-        {/* Headline */}
-        <h1 className="font-display font-black text-display-2xl text-brand-highlight leading-none mb-8">
-          {heroContent.headline.map((line, i) => (
-            <span
-              key={i}
-              className="block animate-fade-up"
-              style={{ animationDelay: `${0.2 + i * 0.12}s` }}
-            >
-              {i === 1 ? (
-                <>
-                  {line.split("people")[0]}
-                  <em className="not-italic text-brand-accent">people.</em>
-                </>
-              ) : (
-                line
-              )}
-            </span>
-          ))}
-        </h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+            className="font-display font-black text-7xl md:text-[8rem] text-brand-surface tracking-tighter leading-[0.85] mb-8 uppercase drop-shadow-2xl"
+          >
+            {siteData.hero.headline}
+          </motion.h1>
 
-        {/* Subline + CTAs */}
-        <div
-          className="flex flex-col lg:flex-row lg:items-end gap-10 animate-fade-up"
-          style={{ animationDelay: "0.48s" }}
-        >
-          <p className="text-brand-muted text-lg leading-relaxed max-w-md">
-            {heroContent.subline}
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="text-xl md:text-2xl text-brand-bg/90 font-body mb-10 max-w-2xl leading-relaxed drop-shadow-md font-medium"
+          >
+            {siteData.hero.subheadline}
+          </motion.p>
 
-          <div className="flex flex-wrap gap-4">
-            <Button href={heroContent.cta.href} variant="primary" className="text-base px-8 py-4">
-              {heroContent.cta.label}
-              <span className="ml-1">→</span>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="flex flex-wrap gap-4"
+          >
+            <Button href="/contact" variant="primary" className="text-lg px-8 py-5 group relative overflow-hidden">
+              <span className="relative z-10">{siteData.hero.cta}</span>
+              <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out" />
             </Button>
-            <Button href={heroContent.ctaGhost.href} variant="outline" className="text-base px-8 py-4">
-              {heroContent.ctaGhost.label}
+            <Button href="/programs" variant="outline" className="text-lg px-8 py-5 !border-brand-bg/30 !text-brand-bg backdrop-blur-sm hover:!bg-brand-bg hover:!text-brand-text">
+              Explore Programs
             </Button>
-          </div>
+          </motion.div>
         </div>
+      </motion.div>
 
-        {/* Stats */}
-        <div
-          className="mt-16 pt-10 border-t border-brand-border grid grid-cols-3 gap-6 max-w-md animate-fade-up"
-          style={{ animationDelay: "0.62s" }}
-        >
-          {heroContent.stats.map((stat) => (
-            <div key={stat.label}>
-              <p className="font-display font-black text-3xl text-brand-highlight">{stat.value}</p>
-              <p className="text-xs text-brand-muted mt-1 leading-tight">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Marquee ticker */}
-      <div className="relative z-10 border-y border-brand-border bg-brand-surface/50 backdrop-blur-sm py-4 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {marqueeItems.map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-6 px-6 text-sm font-mono uppercase tracking-widest text-brand-muted">
-              {item}
-              <span className="text-brand-accent text-lg">✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-brand-surface/50 font-mono text-xs uppercase tracking-widest pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      >
+        <span>Scroll to explore</span>
+        <motion.div
+          className="w-px h-12 bg-gradient-to-b from-brand-accent to-transparent"
+          animate={{ height: ["0px", "48px", "0px"], y: [0, 24, 48] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </motion.div>
     </section>
   );
 }

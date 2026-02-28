@@ -9,18 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       // ─── BRAND COLORS ─── Change these to re-theme the entire site
-      // Classic Modern Light Theme — 4 core colors:
-      //   Warm White (#FAFAF8), Warm Gray (#8C8B7E), Ink (#1C1C18), Indigo (#2563EB)
+      // Hanuman GYM - Strict 3 colors: Black #111111, Red #E10600, Light #F5F5F5
       colors: {
         brand: {
-          bg:        "#FAFAF8",   // warm white — main background
-          surface:   "#F0EFE8",   // warm off-white — card/surface background
-          border:    "#E2E0D6",   // warm light gray — dividers & borders
-          muted:     "#8C8B7E",   // warm taupe gray — secondary text & labels
-          text:      "#1C1C18",   // near-black ink — primary body text
-          accent:    "#2563EB",   // classic indigo — CTAs, highlights, links
-          accent2:   "#DC2626",   // warm red — heart icon & decorative accents
-          highlight: "#0D0D0A",   // deep ink black — hero headlines
+          bg:        "#F5F5F5",   // light background — main background
+          surface:   "#FFFFFF",   // white — card/surface background
+          border:    "#E5E5E5",   // light gray — dividers & borders
+          muted:     "#666666",   // gray — secondary text & labels
+          text:      "#111111",   // black — primary body text
+          accent:    "#E10600",   // red — CTAs, highlights, links
+          accent2:   "#E10600",   // red
+          highlight: "#000000",   // deep black — hero headlines
         },
       },
       fontFamily: {

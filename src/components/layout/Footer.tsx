@@ -1,55 +1,65 @@
 import Link from "next/link";
-import { siteConfig } from "@/data/siteData";
+import { siteData } from "@/data/siteData";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Programs", href: "/programs" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-border mt-auto">
+    <footer className="border-t border-brand-border mt-auto bg-brand-bg">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
-          <p className="font-display font-black text-2xl text-brand-highlight tracking-tighter">
-            {siteConfig.name}
+          <p className="font-display font-black text-3xl uppercase text-brand-text tracking-tighter">
+            {siteData.global.gymName}
           </p>
-          <p className="mt-2 text-sm text-brand-muted leading-relaxed max-w-xs">
-            {siteConfig.description}
+          <p className="mt-4 text-sm text-brand-muted leading-relaxed max-w-xs">
+            {siteData.hero.subheadline}
           </p>
         </div>
 
         {/* Nav */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-mono uppercase tracking-widest text-brand-muted mb-1">Navigation</p>
-          {siteConfig.nav.map((item) => (
+          <p className="text-xs font-mono uppercase tracking-widest text-brand-muted mb-2">Navigation</p>
+          {navLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-brand-text hover:text-brand-accent transition-colors w-fit"
+              className="text-sm font-bold uppercase text-brand-text hover:text-brand-accent transition-colors w-fit"
             >
               {item.label}
             </Link>
           ))}
-          <Link href="/contact" className="text-sm text-brand-text hover:text-brand-accent transition-colors w-fit">
-            Contact
-          </Link>
         </div>
 
         {/* Contact */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-mono uppercase tracking-widest text-brand-muted mb-1">Get in Touch</p>
+          <p className="text-xs font-mono uppercase tracking-widest text-brand-muted mb-2">Connect</p>
           <a
-            href={`mailto:${siteConfig.footer.email}`}
-            className="text-sm text-brand-accent hover:underline underline-offset-4"
+            href={`mailto:${siteData.global.email}`}
+            className="text-sm text-brand-text hover:text-brand-accent transition-colors"
           >
-            {siteConfig.footer.email}
+            {siteData.global.email}
           </a>
-          <div className="flex gap-4 mt-2">
-            {siteConfig.social.map((s) => (
+          <p className="text-sm text-brand-text break-words">
+            {siteData.global.location}
+          </p>
+          <p className="text-sm text-brand-text">
+            {siteData.global.hours}
+          </p>
+          <div className="flex gap-4 mt-4">
+            {Object.entries(siteData.global.socials).map(([platform, url]) => (
               <a
-                key={s.label}
-                href={s.href}
-                className="w-8 h-8 border border-brand-border rounded-full flex items-center justify-center text-xs text-brand-muted hover:border-brand-accent hover:text-brand-accent transition-all duration-200"
-                aria-label={s.label}
+                key={platform}
+                href={url}
+                className="text-sm font-bold uppercase text-brand-text hover:text-brand-accent transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {s.icon.toUpperCase()}
+                {platform}
               </a>
             ))}
           </div>
@@ -57,12 +67,10 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-brand-border">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-brand-muted">{siteConfig.footer.copy}</p>
-          <p className="text-xs text-brand-muted">
-            Crafted with{" "}
-            <span className="text-brand-accent2">♥</span>{" "}
-            in Brooklyn
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-brand-muted font-mono uppercase">© {new Date().getFullYear()} {siteData.global.gymName}. ALL RIGHTS RESERVED.</p>
+          <p className="text-xs text-brand-muted font-mono uppercase">
+            Designed for Performance
           </p>
         </div>
       </div>
