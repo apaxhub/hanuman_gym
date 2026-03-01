@@ -238,42 +238,43 @@ export default function ProgramsContent() {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end perspective-[1500px]">
+                    ```tsx
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch perspective-[1500px]">
                         {siteData.memberships.map((plan, i) => (
                             <TiltCard key={plan.id} className={plan.id === 'pro' ? "md:-mt-8 md:mb-8" : ""}>
-                                <div className={`p-10 lg:p-12 relative overflow-hidden flex flex-col h-full bg-brand-surface transform-gpu border ${plan.id === 'pro' ? 'border-brand-accent shadow-[0_0_40px_rgba(225,6,0,0.15)]' : 'border-brand-border hover:border-brand-text/50'} transition-all duration-500`}>
+                                <div className={`p-6 sm:p-8 lg:p-12 relative overflow-hidden flex flex-col h-full bg-brand-surface transform-gpu border ${plan.id === 'pro' ? 'border-brand-accent shadow-[0_0_40px_rgba(225,6,0,0.15)]' : 'border-brand-border hover:border-brand-text/50'} transition-all duration-500`}>
 
                                     {/* Highlight bar */}
                                     <div className={`absolute top-0 left-0 w-full h-1.5 transition-transform duration-500 origin-left ${plan.id === 'pro' ? 'bg-brand-accent scale-x-100' : 'bg-brand-text scale-x-0 group-hover:scale-x-100'}`} />
 
                                     {plan.id === 'pro' && (
-                                        <div className="absolute top-6 right-6 bg-brand-accent text-white text-xs font-bold uppercase tracking-widest py-1 px-3 shadow-[0_0_10px_rgba(225,6,0,0.4)]">
+                                        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-brand-accent text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest py-1 px-2 sm:px-3 shadow-[0_0_10px_rgba(225,6,0,0.4)]">
                                             Popular
                                         </div>
                                     )}
 
-                                    <h3 className="font-display font-black text-4xl text-brand-text uppercase mb-2">{plan.name}</h3>
-                                    <div className="flex items-baseline gap-2 mb-10">
-                                        <p className="font-mono text-5xl font-black text-brand-text tracking-tighter">{plan.price}</p>
-                                        <span className="text-brand-muted font-bold font-body uppercase text-sm tracking-widest">/mo</span>
+                                    <h3 className="font-display font-black text-3xl sm:text-4xl text-brand-text uppercase mb-2 break-words">{plan.name}</h3>
+                                    <div className="flex items-baseline flex-wrap gap-1 sm:gap-2 mb-8 sm:mb-10">
+                                        <p className="font-mono text-4xl sm:text-5xl font-black text-brand-text tracking-tighter">{plan.price}</p>
                                     </div>
 
-                                    <ul className="space-y-5 mb-12 flex-grow">
+                                    <ul className="space-y-4 sm:space-y-5 mb-10 sm:mb-12 flex-grow">
                                         {plan.features.map((feature, idx) => (
-                                            <li key={idx} className="flex items-start gap-3 font-body font-medium text-brand-muted hover:text-brand-text transition-colors">
-                                                <Check className="w-5 h-5 text-brand-accent mt-0.5 flex-shrink-0" />
-                                                <span>{feature}</span>
+                                            <li key={idx} className="flex items-start gap-3 font-body font-medium text-brand-muted hover:text-brand-text transition-colors text-sm sm:text-base">
+                                                <Check className="w-4 h-4 sm:w-5 sm:h-5 text-brand-accent mt-1 flex-shrink-0" />
+                                                <span className="leading-snug">{feature}</span>
                                             </li>
                                         ))}
                                     </ul>
 
-                                    <button className={`w-full py-5 px-6 uppercase font-bold text-sm tracking-widest transition-all duration-300 relative overflow-hidden group/btn ${plan.id === 'pro' ? 'bg-brand-accent text-white hover:bg-white hover:text-brand-text shadow-[0_10px_20px_rgba(225,6,0,0.3)] hover:shadow-none' : 'bg-brand-bg text-brand-text border border-brand-border hover:bg-brand-text hover:text-white hover:border-brand-text'}`}>
+                                    <button className={`w-full py-4 sm:py-5 px-4 sm:px-6 uppercase font-bold text-xs sm:text-sm tracking-widest transition-all duration-300 relative overflow-hidden group/btn ${plan.id === 'pro' ? 'bg-brand-accent text-white hover:bg-white hover:text-brand-text shadow-[0_10px_20px_rgba(225,6,0,0.3)] hover:shadow-none' : 'bg-brand-bg text-brand-text border border-brand-border hover:bg-brand-text hover:text-white hover:border-brand-text'}`}>
                                         <span className="relative z-10">Select Plan</span>
                                     </button>
                                 </div>
                             </TiltCard>
                         ))}
                     </div>
+                    ```
                 </Reveal>
             </div>
 
