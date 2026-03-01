@@ -15,9 +15,9 @@ const ICONS: Record<string, React.ReactNode> = {
 };
 
 const PROGRAM_IMAGES: Record<string, string> = {
-    strength: "/assets/hero/hero-gym.png",
-    functional: "/assets/trainers/trainer-2.png",
-    coaching: "/assets/trainers/trainer-1.png"
+    strength: "/assets/programs/strength.png",
+    functional: "/assets/programs/functional.png",
+    coaching: "/assets/programs/coaching.png"
 };
 
 const TiltCard = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
@@ -92,7 +92,7 @@ export default function ProgramsContent() {
                         className="object-cover object-center filter grayscale contrast-150"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/80 to-brand-text/50" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/30 to-brand-text/50" />
                 </motion.div>
 
                 <motion.div
@@ -104,14 +104,14 @@ export default function ProgramsContent() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, ease: "easeOut" }}
                     >
-                        <p className="text-brand-accent font-mono tracking-widest uppercase mb-4 flex items-center justify-center gap-3 font-bold">
-                            <span className="w-12 h-[2px] bg-brand-accent shadow-[0_0_10px_rgba(225,6,0,0.8)]"></span>
+                        <p className="text-brand-accent font-mono tracking-widest uppercase mb-4 flex items-center justify-center gap-2 md:gap-3 font-bold text-sm md:text-base">
+                            <span className="w-8 md:w-12 h-[2px] bg-brand-accent shadow-[0_0_10px_rgba(225,6,0,0.8)]"></span>
                             Train Like A Machine
-                            <span className="w-12 h-[2px] bg-brand-accent shadow-[0_0_10px_rgba(225,6,0,0.8)]"></span>
+                            <span className="w-8 md:w-12 h-[2px] bg-brand-accent shadow-[0_0_10px_rgba(225,6,0,0.8)]"></span>
                         </p>
-                        <h1 className="font-display font-black text-6xl md:text-[8rem] text-brand-text drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] uppercase tracking-tighter leading-[0.85] mb-6">
+                        <h1 className="font-display font-black text-[clamp(4rem,10vw,8rem)] text-brand-text drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] uppercase tracking-tighter leading-[0.85] mb-6">
                             Elite <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/50">Performance</span>
+                            <span className="text-transparent text-[clamp(3rem,8vw,7rem)] bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/50">Performance</span>
                         </h1>
                     </motion.div>
                 </motion.div>
@@ -134,7 +134,7 @@ export default function ProgramsContent() {
                                             initial={{ rotateY: 15, y: 50, opacity: 0 }}
                                             whileInView={{ rotateY: 0, y: 0, opacity: 1 }}
                                             viewport={{ once: true, margin: "-100px" }}
-                                            transition={{ duration: 1, type: "spring", bounce: 0.3 }}
+                                            transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
                                         >
                                             {/* Mask Reveal Animation */}
                                             <motion.div
@@ -142,7 +142,7 @@ export default function ProgramsContent() {
                                                 initial={{ scaleY: 1 }}
                                                 whileInView={{ scaleY: 0 }}
                                                 viewport={{ once: true, margin: "-100px" }}
-                                                transition={{ duration: 1.2, delay: 0.2, ease: [0.77, 0, 0.175, 1] }}
+                                                transition={{ duration: 0.7, delay: 0.1, ease: [0.77, 0, 0.175, 1] }}
                                             />
 
                                             {/* Rich Image Background */}
@@ -151,7 +151,7 @@ export default function ProgramsContent() {
                                                 initial={{ scale: 1.2, filter: "blur(10px)" }}
                                                 whileInView={{ scale: 1, filter: "blur(0px)" }}
                                                 viewport={{ once: true, margin: "-100px" }}
-                                                transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+                                                transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
                                             >
                                                 <Image
                                                     src={PROGRAM_IMAGES[program.id] || "/assets/hero/hero-gym.png"}

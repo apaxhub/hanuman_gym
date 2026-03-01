@@ -20,14 +20,19 @@ export default function Header() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
+    // Check initial scroll on mount
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const hasTransparentHero = pathname === "/" || pathname === "/programs";
+  const isHeaderSolid = scrolled || !hasTransparentHero || menuOpen;
 
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled
+        isHeaderSolid
           ? "bg-brand-bg/90 backdrop-blur-md border-b border-brand-border"
           : "bg-transparent"
       )}
@@ -37,7 +42,7 @@ export default function Header() {
         <Link href="/" className="flex items-baseline gap-2 group">
           <span className={cn(
             "font-display font-black text-2xl tracking-tighter uppercase transition-colors duration-300",
-            scrolled || menuOpen ? "text-brand-text" : "text-white drop-shadow-md"
+            isHeaderSolid ? "text-brand-text" : "text-white drop-shadow-md"
           )}>
             {siteData.global.gymName}
           </span>
@@ -53,7 +58,7 @@ export default function Header() {
                 "text-sm font-body font-medium tracking-wide transition-colors duration-200 uppercase",
                 pathname === item.href
                   ? "text-brand-accent"
-                  : scrolled
+                  : isHeaderSolid
                     ? "text-brand-muted hover:text-brand-text"
                     : "text-white/90 hover:text-white drop-shadow-md"
               )}
@@ -72,9 +77,9 @@ export default function Header() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span className={cn("block w-6 h-0.5 transition-all duration-300", scrolled || menuOpen ? "bg-brand-text" : "bg-white", menuOpen && "rotate-45 translate-y-2")} />
-          <span className={cn("block w-6 h-0.5 transition-all duration-300", scrolled || menuOpen ? "bg-brand-text" : "bg-white", menuOpen && "opacity-0")} />
-          <span className={cn("block w-6 h-0.5 transition-all duration-300", scrolled || menuOpen ? "bg-brand-text" : "bg-white", menuOpen && "-rotate-45 -translate-y-2")} />
+          <span className={cn("block w-6 h-0.5 transition-all duration-300", isHeaderSolid ? "bg-brand-text" : "bg-white", menuOpen && "rotate-45 translate-y-2")} />
+          <span className={cn("block w-6 h-0.5 transition-all duration-300", isHeaderSolid ? "bg-brand-text" : "bg-white", menuOpen && "opacity-0")} />
+          <span className={cn("block w-6 h-0.5 transition-all duration-300", isHeaderSolid ? "bg-brand-text" : "bg-white", menuOpen && "-rotate-45 -translate-y-2")} />
         </button>
       </div>
 

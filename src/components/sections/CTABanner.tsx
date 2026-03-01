@@ -28,13 +28,13 @@ export default function CTABanner() {
                 <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-brand-text opacity-10 rounded-full transform -translate-x-1/3 translate-y-1/3 blur-3xl pointer-events-none" />
 
-                <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10 w-full py-20">
+                <div className="max-w-5xl mx-auto px-4 md:px-12 text-center relative z-10 w-full py-16 md:py-20">
                     <Reveal>
-                        <h2 className="font-display font-black text-6xl md:text-[8rem] text-white uppercase tracking-tighter mb-10 leading-[0.8] drop-shadow-xl">
+                        <h2 className="font-display font-black text-[clamp(3.5rem,8vw,8rem)] text-white uppercase tracking-tighter mb-8 md:mb-10 leading-[0.85] drop-shadow-xl break-words">
                             Stop Waiting.<br />
                             <span className="text-brand-text">Start Doing.</span>
                         </h2>
-                        <p className="text-white/90 text-2xl md:text-3xl font-body mb-16 max-w-3xl mx-auto leading-relaxed drop-shadow-md font-medium">
+                        <p className="text-white/90 text-xl md:text-3xl font-body mb-12 md:mb-16 max-w-3xl mx-auto leading-relaxed drop-shadow-md font-medium px-4">
                             Join Palanpur&apos;s premier performance facility and unleash your true potential.
                         </p>
                         <motion.div
